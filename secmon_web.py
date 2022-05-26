@@ -673,8 +673,9 @@ def psearch():
 			action = request.form['product_action']
 			ptype = request.form['product_type']
 			key_or_cpe = request.form['keyword']
+			description = request.form['description']
 			if action == "Add":
-				p = Process(target=addProduct, args=(ptype,key_or_cpe,))
+				p = Process(target=addProduct, args=(ptype,key_or_cpe,description))
 				p.start()
 				flash('New product registration in progress... You can track new tasks <a href="/tasks">Tasks</a> tab. ',"success")
 				return render_template('product-mgmt.html')			
