@@ -636,7 +636,7 @@ def registerNewCve(cve_id,reason,product):
 	except Exception as e:
 		print("ERROR when SECMON would to register this CVE : ",cve_id)
 		handleException(e)
-def addProduct(ptype, key_or_cpe):
+def addProduct(ptype, key_or_cpe, description):
 	sleep(10)
 	task_id = random.randint(10000,99999)
 	task_status = "In Progress"
@@ -667,7 +667,7 @@ def addProduct(ptype, key_or_cpe):
 				raise Exception('Product already in the product list.')
 			if not "cpe" in key_or_cpe:
 				raise Exception('The CPE is in a bad format.')         
-			cur.execute("INSERT INTO cpe_list (cpe) VALUES (?);", (key_or_cpe,))
+			cur.execute("INSERT INTO cpe_list (cpe,description) VALUES (?,?);", (key_or_cpe,description))
 			con.commit()
 			task_status = "Success"
 			task_comment = f"Following product successfully added : {key_or_cpe} !"
